@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package tela.manutencao;
-
+import tela.listagem.ListagemSupermercado;
 /**
  *
  * @author Administrador
  */
 public class ManutencaoSupermercado extends javax.swing.JDialog {
-
+  public ListagemSupermercado listagem;
     /**
      * Creates new form ManutencaoSupermercado
      */
@@ -18,7 +18,26 @@ public class ManutencaoSupermercado extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+ //Entrando na Manutenção de Produto para Adicionar um novo Produto (OBS: o nome do método deverá ser o mesmo nome da classe)
+ public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem) {
+        super(parent, modal);
+        initComponents();
+        this.listagem = listagem;
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        btnAlterar.setEnabled(false); //desabilitando o botão alterar
+        btnExcluir.setEnabled(false); //desabilitando o botão excluir
+          
+  }
+   public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem, int pk) {
+        super(parent, modal);
+        initComponents();
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        this.listagem = listagem;
+        controlador.ControladorSupermercado.atualizaCampos(this, pk);//pegando os valores do BD e colocando na tela
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +81,12 @@ public class ManutencaoSupermercado extends javax.swing.JDialog {
 
         jLabel7.setText("Valor da Bolsa:");
 
+        jtfValorNaBolsa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfValorNaBolsaActionPerformed(evt);
+            }
+        });
+
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +102,11 @@ public class ManutencaoSupermercado extends javax.swing.JDialog {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,6 +194,14 @@ controlador.ControladorSupermercado.inserir(this);        // TODO add your handl
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 controlador.ControladorSupermercado.alterar(this);        // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void jtfValorNaBolsaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorNaBolsaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfValorNaBolsaActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+controlador.ControladorSupermercado.excluir(this);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
